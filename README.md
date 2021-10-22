@@ -4,6 +4,8 @@ docker container rm --force $(docker container ls --all --quiet) -> Удалит
 
 docker image rm --force $(docker image ls --all --quiet) -> Удалить все образы в системе
 
+docker volume rm --force $(docker volume ls --quiet) -> Удалить все тома докера в системе
+
 docker container stats [id] -> Получить информацию о том, сколько системных ресурсов использует контейнер
 
 docker container logs [id] -> Получить логи приложения, запущенного в контейнере
