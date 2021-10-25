@@ -44,3 +44,13 @@ docker container run -v [volumeName]:[pathWhereToStoreTheValumeInAContainer] [im
 
 docker container run --mount [type],source=[pathOnHostMachine],target=[targetPathInTheContainer] [image] -> Привязать директорию на хосте к директории внутри контейнера
 
+docker network create [networkName] -> создать сеть с определенным наименованием
+
+docker-compose logs --tail=1 [serviceName] -> получить последнюю лог запись из каждого работающего контейнера сервиса с соответствующим наименованием
+
+docker-compose up --scale [serviceName]=[number] -> изменить число контейнеров соответствующего сервиса до определенного числа
+
+docker-compose down - полностью убрать вызванное приложение со всеми контейнерами (их не будет в списке отсановленных контейнеров)
+docker-compose stop - остановить приложение с возможностью вернуть его обратно в том же состоянии (например, с несколькими контейнерами на одном сервисе)
+
+docker-compose ps -> получить список всех контейнеров, которые являются частью текущего приложения
