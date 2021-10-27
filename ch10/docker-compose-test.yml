@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  todo-web:
+    image: diamol/ch06-todo-list:latest
+    ports:
+      - 8080:80
+    environment:
+      - Database:Provider=Postgres
+    networks:
+      - app-net
+  todo-db:
+    image: diamol/postgres:11.5
+    ports:
+      - 5432:5432
+    networks:
+      - app-net
+    environment:
+      - PGDATA=/dbfolder
+    volumes:
+      - testdb:/dbfolder
+networks:
+  app-net:
+    name: todo-test
+volumes:
+  testdb:
