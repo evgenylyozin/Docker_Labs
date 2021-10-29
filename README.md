@@ -63,3 +63,30 @@ docker-compose -f [pathToFirstComposeFile] -f [pathToSecondComposeFile] -f... -p
 
 docker-compose -f [pathToFirstComposeFile] -f [pathToSecondComposeFile] -f... -p [projectName] down -> Остановить и удалить контейнеры, созданные на основе нескольких файлов docker compose (путём слияния файлов)
 
+
+.. Docker Swarm ..
+
+docker swarm init -> перейти в режим оркестратора контейнеров и сделать текущую машину менеджером
+
+docker swarm join-token worker -> получить токен для подключения серверов-работников к кластеру текущего менеджера 
+
+docker swarm join-token manager -> получить токен для подключения серверов-менеджеров к кластеру
+
+docker node ls -> Получить список всех серверов (узлов), подключенных к кластеру
+
+docker service create --name [name] --replicas [number] [image] -> Создать сервис, который будет работать внутри кластера
+
+docker service ls -> получить список всех работающих сервисов в кластере
+
+docker service ps [serviceName] -> получить список всех реплик конкретного сервиса
+
+docker service logs -> получить логи сервисов
+
+docker service inspect [serviceName] -> получить подробные сведения о конкретном сервисе в кластере
+
+docker service update --[someParams] [serviceName] -> Обновить спецификацию сервиса (например, использовать новый образ)
+
+docker service update --rollback [serviceName] -> откатить последнее обновление назад
+
+docker network create --driver overlay [networkName] -> создать наложенную сеть (доступна всем узлам кластера)
+
