@@ -1,0 +1,57 @@
+networks:
+  app-net:
+    name: image-prod
+services:
+  access-log:
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 75M
+    image: diamol/ch04-access-log
+    ports:
+      - "80"
+    networks:
+      app-net: {}
+  iotd:
+    deploy:
+      replicas: 4
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 75M
+      rollback_config:
+        failure_action: continue
+        order: start-first
+        parallelism: 4
+      update_config:
+        failure_action: rollback
+        monitor: 30s
+        order: start-first
+        parallelism: 2
+    healthcheck:
+      interval: 2s
+      retries: 2
+      start_period: 5s
+      test: ["CMD", "curl", "-f", "http://localhost/image"]
+      timeout: 3s
+    image: diamol/ch04-image-of-the-day
+    networks:
+      app-net: {}
+  image-gallery:
+    deploy:
+      mode: global
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 150M
+    image: diamol/ch04-image-gallery
+    networks:
+      app-net: {}
+    ports:
+    - mode: host
+      published: 80
+      target: 80
+version: '3.7'
+
