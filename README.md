@@ -112,3 +112,7 @@ docker node update --label-add storage=raid $(docker node ls -q) -> помети
 
  docker node promote [node] -> Повысить ноду до уровня менеджера
  docker node demote [node] -> Понизить менеджера до уровня рабочего
+
+ docker system df -> получить данные о занятой образами, контейнерами, томами, кешем памяти на машине
+
+ docker system prune -> удалить все не используемые элементы докера
